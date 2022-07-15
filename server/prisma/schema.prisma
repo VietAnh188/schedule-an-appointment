@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Person {
+  id            String        @id @default(uuid()) @db.Uuid
+  security_code String?       @db.VarChar(10)
+  account       Account?
+  appointments  Appointment[]
+  profile       Profile?
+}
+
+model Account {
+  id         String   @id @default(uuid()) @db.Uuid
+  username   String   @unique(map: "Account_username_unique_constraint") @db.VarChar(10)
+  password   String   @db.Text
+  email      String   @unique(map: "Account_email_unique_constraint") @db.VarChar(50)
+  active     Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  person_id  String?   @unique @db.Uuid
+  person     Person?   @relation(fields: [person_id], references: [id])
+}
+
+model Profile {
+  id         String  @id @default(uuid()) @db.Uuid
+  first_name String  @db.VarChar(20)
+  last_name  String  @db.VarChar(20)
+  age        Int?
+  address    String?
+  job        String  @db.VarChar(20)
+  person_id  String  @unique @db.Uuid
+  person     Person  @relation(fields: [person_id], references: [id])
+}
+
+model Appointment {
+  id         String   @id @default(uuid()) @db.Uuid
+  title      String   @db.VarChar(20)
+  content    String   @db.VarChar(100)
+  start_time DateTime
+  end_time   DateTime
+  limit      Int      @default(1)
+  price      Decimal  @db.Decimal(10, 2)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  person_id  String   @db.Uuid
+  person     Person   @relation(fields: [person_id], references: [id])
+}
