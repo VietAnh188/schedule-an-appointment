@@ -1,0 +1,13 @@
+{
+  "id": "d8b5c399",
+  "username": "username",
+  "email": "email@gmail.com",
+  "active": true,
+  "created_at": "2022-07-16T11:32:09.476Z",
+  "updated_at": "2022-07-16T11:32:09.928Z",
+  "person_id": "cc940bab-6b49-450a-aff2",
+  "person": {
+    "id": "cc940bab-6b49-450a-aff2",
+    "security_code": null
+  }
+}
