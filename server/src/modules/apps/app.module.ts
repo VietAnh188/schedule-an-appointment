@@ -1,4 +1,4 @@
-import {  Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
@@ -9,6 +9,7 @@ import { AccountsModule } from '../accounts/accounts.module';
 import { PrismaModule } from '../prisma/prisma.module';
 import { PersonsModule } from '../persons/persons.module';
 import { AuthsModule } from '../auths/auths.module';
+import { AppointmentsModule } from '../appointments/appointments.module';
 import { CachesModule } from '../caches/caches.module';
 
 @Module({
@@ -27,6 +28,7 @@ import { CachesModule } from '../caches/caches.module';
     AccountsModule,
     PersonsModule,
     AuthsModule,
+    AppointmentsModule,
     CachesModule,
   ],
   controllers: [AppController],
