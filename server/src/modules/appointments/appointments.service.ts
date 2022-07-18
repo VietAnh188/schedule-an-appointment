@@ -32,6 +32,7 @@ export class AppointmentsService {
             content: appointment.content,
             limit: appointment.limit,
             price: appointment.price,
+            tags: appointment.tags,
             start_time: new Date(appointment.start_time),
             end_time: new Date(appointment.end_time),
           },
