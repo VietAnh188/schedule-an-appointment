@@ -18,13 +18,13 @@ model Person {
 model Account {
   id         String   @id @default(uuid()) @db.Uuid
   username   String   @unique(map: "Account_username_unique_constraint") @db.VarChar(10)
-  password   String   @db.Text
+  password   String
   email      String   @unique(map: "Account_email_unique_constraint") @db.VarChar(50)
   active     Boolean  @default(true)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  person_id  String?   @unique @db.Uuid
-  person     Person?   @relation(fields: [person_id], references: [id])
+  person_id  String?  @unique @db.Uuid
+  person     Person?  @relation(fields: [person_id], references: [id])
 }
 
 model Profile {
@@ -49,5 +49,6 @@ model Appointment {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   person_id  String   @db.Uuid
+  tags       String[]
   person     Person   @relation(fields: [person_id], references: [id])
 }
