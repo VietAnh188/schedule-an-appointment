@@ -1,0 +1,11 @@
+{
+  "personId": "cc940bab-6b49-450a",
+  "appointment": {
+    "title": "kham suc khoe",
+    "content": "kham suc khoe tong quat, dam bao suc khoe mot cach toan dien",
+    "limit": 1,
+    "price": 1000.01,
+    "start_time": "7/16/2022",
+    "end_time": "7/16/2022"
+  }
+}
