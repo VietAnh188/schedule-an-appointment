@@ -20,8 +20,21 @@ export class AppointmentsController {
   ) {}
 
   @Get()
-  async findAll() {
-    return await this.appointmentsService.findAll();
+  async FilterByTags(
+    @Body() body: { tags: string[] },
+    @Res() response: Response,
+  ) {
+    const { tags } = body;
+    return response
+      .status(HttpStatus.OK)
+      .json(await this.appointmentsService.FilterByTags(tags));
+  }
+
+  @Get()
+  async findAll(@Res() response: Response) {
+    return response
+      .status(HttpStatus.OK)
+      .json(await this.appointmentsService.findAll());
   }
 
   @Post()
