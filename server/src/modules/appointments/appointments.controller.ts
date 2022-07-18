@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpStatus,
   InternalServerErrorException,
   Post,
@@ -17,6 +18,11 @@ export class AppointmentsController {
     private appointmentsService: AppointmentsService,
     private personsService: PersonsService,
   ) {}
+
+  @Get()
+  async findAll() {
+    return await this.appointmentsService.findAll();
+  }
 
   @Post()
   async createOne(

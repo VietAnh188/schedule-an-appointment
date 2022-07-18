@@ -6,6 +6,10 @@ import { Appointment } from '@prisma/client';
 export class AppointmentsService {
   constructor(private prisma: PrismaService) {}
 
+  async findAll() {
+    return await this.prisma.appointment.findMany();
+  }
+
   async createOne(personId: string, appointment: Appointment) {
     await this.prisma.person.update({
       where: {
