@@ -39,6 +39,10 @@ export class AppointmentsController {
         },
       });
       await this.appointmentsService.subscribe(person_id, appointment.id);
+      return response.status(HttpStatus.OK).json({
+        status: HttpStatus.OK,
+        response: `person has been subscribed appointment`,
+      });
     } catch (error) {
       throw new InternalServerErrorException();
     }
