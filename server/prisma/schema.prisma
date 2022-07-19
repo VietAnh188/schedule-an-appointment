@@ -59,7 +59,7 @@ model Appointment {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   tags       String[]
-  subcribed Int @default(0)
+  subscribed Int @default(0)
   person_id  String   @db.Uuid
   person     Person   @relation(fields: [person_id], references: [id])
   subscribed_persons PersonsSubscribeAppointments[]
