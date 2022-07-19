@@ -10,7 +10,9 @@ import {
 import { AppointmentsService } from './appointments.service';
 import { PersonsService } from '../persons/persons.service';
 import { IAppointmentCreateOne } from './interface/appointment-create-one.interface';
+import { ISubscribeAppointment } from './interface/subscribe-appointment.interface';
 import { Response } from 'express';
+import { EStatus } from './interface/adjust-subscribe.interface';
 
 @Controller('appointments')
 export class AppointmentsController {
@@ -18,6 +20,29 @@ export class AppointmentsController {
     private appointmentsService: AppointmentsService,
     private personsService: PersonsService,
   ) {}
+
+  @Post('subscribe')
+  async subscribeAppointment(
+    @Body() body: ISubscribeAppointment,
+    @Res() response: Response,
+  ) {
+    try {
+      const { person_id, appointment_id } = body;
+      const appointment = await this.appointmentsService.findOne(
+        appointment_id,
+      );
+      await this.appointmentsService.adjustSubscribed({
+        status: EStatus.INCREASE,
+        target: {
+          appointment_id: appointment.id,
+          value: appointment.subscribed,
+        },
+      });
+      await this.appointmentsService.subscribe(person_id, appointment.id);
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
 
   @Get()
   async FilterByTags(
