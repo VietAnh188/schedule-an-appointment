@@ -7,12 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model PersonsSubscribeAppointments {
+    id String @id @default(uuid()) @db.Uuid
+    subscribedAt DateTime @default(now())
+    person_id String @db.Uuid
+    person Person @relation(fields: [person_id], references: [id])
+    appointment_id String @db.Uuid
+    appointment Appointment @relation(fields: [appointment_id], references: [id])
+}
+
 model Person {
   id            String        @id @default(uuid()) @db.Uuid
   security_code String?       @db.VarChar(10)
   account       Account?
   appointments  Appointment[]
   profile       Profile?
+  subscribed_appointments PersonsSubscribeAppointments[]
 }
 
 model Account {
@@ -51,4 +61,5 @@ model Appointment {
   person_id  String   @db.Uuid
   tags       String[]
   person     Person   @relation(fields: [person_id], references: [id])
+  subscribed_persons PersonsSubscribeAppointments[]
 }
