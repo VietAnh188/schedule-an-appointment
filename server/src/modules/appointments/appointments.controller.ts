@@ -27,7 +27,7 @@ export class AppointmentsController {
     const { tags } = body;
     return response
       .status(HttpStatus.OK)
-      .json(await this.appointmentsService.FilterByTags(tags));
+      .json(await this.appointmentsService.filterByTags(tags));
   }
 
   @Get()

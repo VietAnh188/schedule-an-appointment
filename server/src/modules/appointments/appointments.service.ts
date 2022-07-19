@@ -6,7 +6,7 @@ import { Appointment } from '@prisma/client';
 export class AppointmentsService {
   constructor(private prisma: PrismaService) {}
 
-  async FilterByTags(tags: string[]) {
+  async filterByTags(tags: string[]) {
     return await this.prisma.appointment.findMany({
       where: {
         tags: {
