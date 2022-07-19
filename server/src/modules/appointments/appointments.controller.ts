@@ -5,6 +5,7 @@ import {
   HttpStatus,
   InternalServerErrorException,
   Post,
+  Query,
   Res,
 } from '@nestjs/common';
 import { AppointmentsService } from './appointments.service';
@@ -48,15 +49,14 @@ export class AppointmentsController {
     }
   }
 
-  @Get()
+  @Get('filter')
   async FilterByTags(
-    @Body() body: { tags: string[] },
     @Res() response: Response,
+    @Query() query: { tags: string[] },
   ) {
-    const { tags } = body;
     return response
       .status(HttpStatus.OK)
-      .json(await this.appointmentsService.filterByTags(tags));
+      .json(await this.appointmentsService.filterByTags(query.tags));
   }
 
   @Get()
