@@ -7,24 +7,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model PersonsSubscribeAppointments {
+    id String @id @default(uuid()) @db.Uuid
+    subscribedAt DateTime @default(now())
+    person_id String @db.Uuid
+    person Person @relation(fields: [person_id], references: [id])
+    appointment_id String @db.Uuid
+    appointment Appointment @relation(fields: [appointment_id], references: [id])
+}
+
 model Person {
   id            String        @id @default(uuid()) @db.Uuid
   security_code String?       @db.VarChar(10)
   account       Account?
   appointments  Appointment[]
   profile       Profile?
+  subscribed_appointments PersonsSubscribeAppointments[]
 }
 
 model Account {
   id         String   @id @default(uuid()) @db.Uuid
   username   String   @unique(map: "Account_username_unique_constraint") @db.VarChar(10)
-  password   String   @db.Text
+  password   String
   email      String   @unique(map: "Account_email_unique_constraint") @db.VarChar(50)
   active     Boolean  @default(true)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  person_id  String?   @unique @db.Uuid
-  person     Person?   @relation(fields: [person_id], references: [id])
+  person_id  String?  @unique @db.Uuid
+  person     Person?  @relation(fields: [person_id], references: [id])
 }
 
 model Profile {
@@ -48,6 +58,9 @@ model Appointment {
   price      Decimal  @db.Decimal(10, 2)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  tags       String[]
+  subscribed Int @default(0)
   person_id  String   @db.Uuid
   person     Person   @relation(fields: [person_id], references: [id])
+  subscribed_persons PersonsSubscribeAppointments[]
 }

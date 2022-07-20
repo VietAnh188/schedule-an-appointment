@@ -1,5 +1,3 @@
-
-
 import Home from "../pages/Home";
 import Help from "../pages/Help";
 import Property from "../pages/Property";
