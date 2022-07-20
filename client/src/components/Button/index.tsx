@@ -10,12 +10,14 @@ interface IProps {
 }
 
 function Button({content, color, border, bacolor, borderColor, flag}: IProps) {
+    console.log(borderColor);
+    
     return <button style={{
         color: color === 'primary' ? 'var(--primary-color)' : color, 
         border: border, 
         borderColor: borderColor === 'primary' ? 'var(--primary-color)' : borderColor,
         padding: '8px',
-        backgroundColor: bacolor,
+        backgroundColor: bacolor || 'transparent',
         marginRight: flag}} className="font-medium text-sm">{content}</button>;
 }
 

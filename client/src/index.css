@@ -12,3 +12,7 @@ body{
 :root {
     --height-line : 1px
 }
+
+li {
+    list-style: none;
+}

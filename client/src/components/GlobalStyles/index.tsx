@@ -1,5 +1,6 @@
-function GlobalStyles({children}:{children:JSX.Element}) {
-    return ( children );
+import './global.css'
+function GlobalStyle({children}: {children:JSX.Element}) {
+    return( children );
 }
 
-export default GlobalStyles;
+export default GlobalStyle

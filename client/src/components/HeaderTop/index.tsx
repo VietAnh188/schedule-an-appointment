@@ -25,7 +25,7 @@ function HeaderTop() {
                         content= "List your property"
                         color="white"
                         border="solid 1px"
-                        border-color='white'
+                        borderColor='white'
                     />
                 </li>
                 <li  className="hidden">
