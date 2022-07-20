@@ -4,15 +4,16 @@ import GlobalStyle from './components/GloabalStyle';
 import App from './App';
 import './index.css'
 import reportWebVitals from './reportWebVitals';
+import GlobalStyles from './components/GlobalStyles'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <GlobalStyle>
+    <GlobalStyles>
       <App />
-    </GlobalStyle>
+    </GlobalStyles>
   </React.StrictMode>
 );
 
