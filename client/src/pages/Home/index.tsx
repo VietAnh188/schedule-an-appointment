@@ -7,11 +7,7 @@ const cx = classNames.bind(styles)
 function Home() {
     return (
         <div className={cx('main')}>
-            <div className={cx('header')}>
-                <div className="wrap">
-                    <Header/>
-                </div>
-            </div>
+            <Header/>
         </div>
      );
 }
