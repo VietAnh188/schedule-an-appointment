@@ -1,0 +1,19 @@
+
+.header_top {
+    background-color: var(--primary-color);
+}
+
+
+.logo {
+    padding: 8px 0;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.right ul li {
+    padding: 12px;
+}
+
+.right ul li:last-child {
+    padding: unset;
+}

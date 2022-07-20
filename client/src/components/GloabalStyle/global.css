@@ -1,0 +1,17 @@
+:root {
+    --primary-color: #003580;
+    --yellow-color: #febb02;
+}
+
+.wrap {
+    width: 1110px;
+}
+
+html {
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    width: 100%;
+}
