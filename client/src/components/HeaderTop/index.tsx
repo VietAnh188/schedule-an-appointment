@@ -32,21 +32,25 @@ function HeaderTop() {
                     <Avatar/>
                 </li>
                 <li>
-                    <Button 
-                        content="Register"
-                        color="primary"
-                        border="solid 1px"
-                        borderColor='primary'
-                        bacolor="white"
-                        flag='8px'
-                    />
-                    <Button 
-                        content="Sign in"
-                        color="primary"
-                        border="solid 1px"
-                        borderColor='primary'
-                        bacolor="white"
-                    />
+                    <Link to='/register'>
+                        <Button 
+                            content="Register"
+                            color="primary"
+                            border="solid 1px"
+                            borderColor='primary'
+                            bacolor="white"
+                            flag='8px'
+                        />
+                    </Link>
+                    <Link to='/login'>
+                        <Button 
+                            content="Sign in"
+                            color="primary"
+                            border="solid 1px"
+                            borderColor='primary'
+                            bacolor="white"
+                        />
+                    </Link>
                 </li>
 
                 
