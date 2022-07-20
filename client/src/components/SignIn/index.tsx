@@ -7,7 +7,7 @@ interface IProps {
 
 function LoginInWith({ Icon, names }: IProps) {
   return (
-    <button className="w-16 h-16 cursor-pointer p-3 border-gray-400 hover:border-blue-600 border-1">
+    <button className="w-16 h-16 cursor-pointer p-3 border-gray-400 text-center items-center hover:border-blue-600 border-1">
       <Icon className={`${names}`} style={{ fontSize: "200%" }} />
     </button>
   );
