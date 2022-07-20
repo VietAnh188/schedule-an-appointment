@@ -7,7 +7,7 @@ import { Request, Response, NextFunction } from 'express';
 import { PrismaService } from '../../modules/prisma/prisma.service';
 
 @Injectable()
-export class IsOwnerMiddleware implements NestMiddleware {
+export class IsOwnerPermission implements NestMiddleware {
   constructor(private prisma: PrismaService) {}
 
   async use(request: Request, response: Response, next: NextFunction) {
