@@ -91,7 +91,7 @@ function Authenticate() {
               <div className="cursor-pointer text-lg text-center text-blue-700 font-bold  mt-2">
                 <p
                   onClick={() => {
-                    setMount((prev) => !prev);
+                    setMount((prev)=>!prev);
                   }}
                   style={{ display: mount ? "none" : "block" }}
                 >
