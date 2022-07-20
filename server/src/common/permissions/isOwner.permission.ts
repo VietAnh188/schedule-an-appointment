@@ -10,7 +10,7 @@ import { PrismaService } from '../../modules/prisma/prisma.service';
 export class IsOwnerPermission implements NestMiddleware {
   constructor(private prisma: PrismaService) {}
 
-  async use(request: Request, _response: Response, next: NextFunction) {
+  async use(request: Request, response: Response, next: NextFunction) {
     const { person_id, appointment_id } = request.body;
     const appointment = await this.prisma.appointment.findUnique({
       where: {
