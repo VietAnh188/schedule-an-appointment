@@ -4,8 +4,9 @@ import { HasSubscribePermission } from '../permissions/hasSubscribe.permission';
 import { PrismaService } from '../../modules/prisma/prisma.service';
 
 @Injectable()
-export class CheckHasSubscribeMiddleware implements NestMiddleware {
+export class CheckNotSubscribedMiddleware implements NestMiddleware {
   constructor(private prisma: PrismaService) {}
+
   async use(request: Request, response: Response, next: NextFunction) {
     const { person_id, appointment_id } = request.body;
     const hasSubscribePermission = new HasSubscribePermission(this.prisma);
@@ -14,9 +15,9 @@ export class CheckHasSubscribeMiddleware implements NestMiddleware {
       appointment_id,
     );
     if (hasSubscribe) {
-      next(new ConflictException('has been subscribed'));
-    } else {
       next();
+    } else {
+      next(new ConflictException('has not been subscribed'));
     }
   }
 }

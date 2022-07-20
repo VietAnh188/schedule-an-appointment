@@ -8,7 +8,7 @@ import { PrismaService } from '../../modules/prisma/prisma.service';
 import { IsOwnerPermission } from '../permissions/isOwner.permission';
 
 @Injectable()
-export class CheckIsOwnerMiddleware implements NestMiddleware {
+export class DeniedOwnerMiddleware implements NestMiddleware {
   constructor(private prisma: PrismaService) {}
 
   async use(request: Request, response: Response, next: NextFunction) {

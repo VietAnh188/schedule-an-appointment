@@ -22,6 +22,33 @@ export class AppointmentsController {
     private personsService: PersonsService,
   ) {}
 
+  @Post('unsubscribe')
+  async unsubscribeAppointment(
+    @Body() body: ISubscribeAppointment,
+    @Res() response: Response,
+  ) {
+    try {
+      const { person_id, appointment_id } = body;
+      const appointment = await this.appointmentsService.findOne(
+        appointment_id,
+      );
+      await this.appointmentsService.unsubscribe(person_id, appointment_id);
+      await this.appointmentsService.adjustSubscribed({
+        status: EStatus.DECREASE,
+        target: {
+          appointment_id: appointment.id,
+          value: appointment.subscribed,
+        },
+      });
+      return response.status(HttpStatus.OK).json({
+        status: HttpStatus.OK,
+        response: `person has been unsubscribed appointment`,
+      });
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
+
   @Post('subscribe')
   async subscribeAppointment(
     @Body() body: ISubscribeAppointment,
