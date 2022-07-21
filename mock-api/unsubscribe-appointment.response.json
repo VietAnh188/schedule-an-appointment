@@ -1,4 +1,4 @@
 {
-  "status": 200,
-  "response": "person has been subscribed appointment"
+  "statusCode": 200,
+  "message": "person has been subscribed appointment"
 }
