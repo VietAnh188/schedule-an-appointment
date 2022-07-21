@@ -41,8 +41,8 @@ export class AppointmentsController {
         },
       });
       return response.status(HttpStatus.OK).json({
-        status: HttpStatus.OK,
-        response: `person has been unsubscribed appointment`,
+        statusCode: HttpStatus.OK,
+        message: `person has been unsubscribed appointment`,
       });
     } catch (error) {
       throw new InternalServerErrorException();
@@ -68,8 +68,8 @@ export class AppointmentsController {
       });
       await this.appointmentsService.subscribe(person_id, appointment.id);
       return response.status(HttpStatus.OK).json({
-        status: HttpStatus.OK,
-        response: `person has been subscribed appointment`,
+        statusCode: HttpStatus.OK,
+        message: `person has been subscribed appointment`,
       });
     } catch (error) {
       throw new InternalServerErrorException();
@@ -103,8 +103,8 @@ export class AppointmentsController {
       const person = await this.personsService.findOne(personId);
       await this.appointmentsService.createOne(person.id, appointment);
       return response.status(HttpStatus.OK).json({
-        status: HttpStatus.OK,
-        response: `${person.id} are created a new appointment`,
+        statusCode: HttpStatus.OK,
+        message: `${person.id} are created a new appointment`,
       });
     } catch (error) {
       throw new InternalServerErrorException();

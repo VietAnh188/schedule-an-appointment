@@ -47,8 +47,8 @@ export class LocationsController {
     if (!cities.length)
       throw new HttpException(
         {
-          status: HttpStatus.NOT_FOUND,
-          error: 'No one cities found',
+          statusCode: HttpStatus.NOT_FOUND,
+          message: 'No one cities found',
         },
         HttpStatus.NOT_FOUND,
       );
