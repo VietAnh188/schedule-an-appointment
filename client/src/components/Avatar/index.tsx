@@ -1,7 +1,7 @@
 function Avatar() {
     return ( <div className="flex items-center">
         <div className="h-full">
-            <img style={{border: "2px solid var(--yellow-color)"}} src="https://t-cf.bstatic.com/static/img/identity/profile/b47cd0e05ec8b7831167f4f7593ead56402a6bb4.svg" className="w-7 rounded-full" alt="" />
+            <img style={{border: "2px solid var(--yellow-color)"}} src="https://lh3.googleusercontent.com/a-/AFdZucpPuuCThV0AJemjK8CbI10WuzJoFjwRuGzMUPnYcQ=s96-c?sz=64" className="w-7 rounded-full" alt="" />
         </div>
         <div className="ml-2">
             <div className="text-white text-sm font-medium">Nguyễn Văn Tùng</div>

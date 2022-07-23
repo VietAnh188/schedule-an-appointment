@@ -3,6 +3,9 @@
     background-color: var(--primary-color);
 }
 
+.wrap {
+    
+}
 
 .logo {
     padding: 8px 0;
@@ -14,6 +17,19 @@
     padding: 12px;
 }
 
-.right ul li:last-child {
-    padding: unset;
+.right ul li:hover {
+    background:hsla(0,0%,100%,.1);
+}
+
+.right ul li a {
+    display: inline-block;
+}
+
+.right ul li a:hover {
+    opacity: 0.8;
+    
+}
+
+.right ul .btn{
+    padding: 0;
 }
