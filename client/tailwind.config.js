@@ -6,11 +6,23 @@ module.exports = {
       height: {
         line: "1px",
       },
-      
+      fontSize: {
+        tworem: '2rem'
+      },
+      borderWidth:{
+        "1": "1px"
+      },
+      backgroundColor: {
+        "primary": "#003580"
+      },
+      borderColor: {
+        "primary": "#003580"
+      },
+      colors: {
+        "primary": "#003580"
+      }
     },
-    borderWidth:{
-      "1": "1px"
-    }
+    
   },
   plugins: [],
 };
