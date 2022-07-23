@@ -9,10 +9,12 @@ interface Ihead {
     nav?: boolean
 }
 function Header({nav}:Ihead) {
+    if(nav==undefined)
+        nav=true
     return ( 
         <div className={cx('header')}>
             <HeaderTop/>
-            {nav && <Navbar/>}
+            {nav==false || <Navbar/>}
         </div>
         
      );
