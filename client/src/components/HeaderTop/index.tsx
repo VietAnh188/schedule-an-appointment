@@ -38,7 +38,7 @@ function HeaderTop() {
               <Link to="/property">
                 <Button
                   content="List your property"
-                  className="text-white border border-solid border-white bg-primary"
+                  classname="text-white border border-solid border-white bg-primary"
                 />
               </Link>
             </li>
@@ -49,13 +49,13 @@ function HeaderTop() {
               <Link to="/register">
                 <Button
                   content="Register"
-                  className="text-primary border border-solid border-primary bg-white mr-2"
+                  classname="text-primary border border-solid border-primary bg-white mr-2"
                 />
               </Link>
               <Link to="/login">
                 <Button
                   content="Sign in"
-                  className="text-primary border border-solid border-primary bg-white"
+                  classname="text-primary border border-solid border-primary bg-white"
                 />
               </Link>
             </li>

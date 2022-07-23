@@ -2,9 +2,7 @@ import InputPassword from "../../../components/Input";
 import HeaderTop from "../../../components/HeaderTop";
 import FooterSignIn from "../../../components/FooterSignIn";
 function NewPassword() {
-  function createPass(){
-    
-  }
+
     return (
       <div className="w-full">
         <HeaderTop />
@@ -37,7 +35,7 @@ function NewPassword() {
             </div>
             <div className="w-full mt-4 mb-6">
               <button className="cursor-pointer w-full text-center text-base leading-6 h-12 bg-blue-600 border-none rounded font-semibold text-white"
-              onClick={createPass}
+
               >
                 Create Account
               </button>

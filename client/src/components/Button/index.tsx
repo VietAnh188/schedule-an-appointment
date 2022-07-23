@@ -1,10 +1,10 @@
 interface IProps {
     content: string,
-    className: string
+    classname: string
 }
 
-function Button({content, className}: IProps) {
-    return <button className={`font-medium text-sm p-2 cursor-pointer ${className}`}>{content}</button>;
+function Button({content, classname}: IProps) {
+    return <button className={`font-medium text-sm p-2 cursor-pointer ${classname}`}>{content}</button>;
 }
 
 export default Button;
