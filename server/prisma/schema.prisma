@@ -50,6 +50,7 @@ model Profile {
 
 model Appointment {
   id         String   @id @default(uuid()) @db.Uuid
+  active Boolean @default(true)
   title      String   @db.VarChar(20)
   content    String   @db.VarChar(100)
   start_time DateTime
