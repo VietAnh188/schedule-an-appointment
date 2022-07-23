@@ -9,8 +9,7 @@ const cx = classNames.bind(styles);
 
 function HeaderTop() {
   return (
-    <div className="wrap">
-      <header className={cx("header_top") + " flex justify-between"}>
+      <header className={cx("header_top") + " wrap flex justify-between"}>
         <div className={`${cx("left")} py-3 px-4`}>
           <div className={` text-white font-bold cursor-default ${cx("logo")}`}>
             BOOKING.COM
@@ -62,7 +61,6 @@ function HeaderTop() {
           </ul>
         </div>
       </header>
-    </div>
   );
 }
 

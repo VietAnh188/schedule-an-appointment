@@ -5,7 +5,7 @@ function NewPassword() {
 
     return (
       <div className="w-full">
-        <HeaderTop />
+       
         <div className="w-full h-full grid place-items-center">
           <div className=" mt-5 m-auto w-350  pt-1 pb-3 text-left">
             <div>
