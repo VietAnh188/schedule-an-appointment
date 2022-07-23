@@ -4,9 +4,18 @@ import { Link } from "react-router-dom";
 import {BsQuestionCircle} from 'react-icons/bs'
 import Button from "../Button";
 import Avatar from "../Avatar";
+import { useEffect, useRef } from "react";
 const cx = classNames.bind(styles)
 
 function HeaderTop() {
+    const getStartRef = useRef<HTMLLIElement>(document.createElement('li'))
+    useEffect(()=>{
+            window.location.pathname === "/login"
+              ? (getStartRef.current.hidden = true)
+              : (getStartRef.current.hidden = false);
+    })
+
+
     return ( <header className={cx('header_top') + ' flex justify-between'}>
         <div className={`${cx('left')} py-3 px-4`}>
             <div className={` text-white font-bold ${cx('logo')}`}>BOOKING.COM</div>
@@ -31,7 +40,7 @@ function HeaderTop() {
                 <li  className="hidden">
                     <Avatar/>
                 </li>
-                <li>
+                <li ref={getStartRef}>
                     <Link to='/register'>
                         <Button 
                             content="Register"

@@ -1,4 +1,3 @@
-import classNames from "classnames";
 
 interface IProps {
     content: string,
@@ -10,8 +9,6 @@ interface IProps {
 }
 
 function Button({content, color, border, bacolor, borderColor, flag}: IProps) {
-    console.log(borderColor);
-    
     return <button style={{
         color: color === 'primary' ? 'var(--primary-color)' : color, 
         border: border, 

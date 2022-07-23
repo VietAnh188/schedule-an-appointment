@@ -1,36 +1,60 @@
-import LoginInWith from "../../components/SignIn";
+import LoginInWith from "../../components/SignInOptions";
 import { FaFacebookSquare, FaApple } from "react-icons/fa";
 import { FcGoogle, FcPhoneAndroid } from "react-icons/fc";
 import { useRef, useState } from "react";
-
-
+import HeaderTop from "../../components/HeaderTop";
+import FooterSignIn from "../../components/FooterSignIn";
+import { useNavigate } from "react-router-dom";
 function Authenticate() {
-  const [mount,setMount] = useState(false)
+  const [mount, setMount] = useState(false);
   const [invalid, setInvalid] = useState(false);
 
-  const emailRef = useRef<HTMLInputElement>(document.createElement('input'))
-  const continueWithEmailRef = useRef<HTMLDivElement>(document.createElement('div'))
-  function ValidateEmail(value:string) {
-    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+  const emailRef = useRef<HTMLInputElement>(document.createElement("input"));
+  const continueWithEmailRef = useRef<HTMLDivElement>(document.createElement("div"));
+  const errorRef = useRef<HTMLParagraphElement>(document.createElement("p"));
+
+  function ValidateEmail(value: string) {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     if (emailRegex.test(value)) {
       return true;
     }
     return false;
   }
+const navigate = useNavigate();
+  function createPass() {
+    continueWithEmailRef.current.hidden = true;
+    navigate("/login/password")
+  }
 
-  function createPass(){
-      continueWithEmailRef.current.hidden =true
+  function submitEmail() {
+    return ValidateEmail(emailRef.current.value) ? true : false;
   }
-  function submitEmail () {
-     ValidateEmail(emailRef.current.value)
-       ? setInvalid(false)
-       : setInvalid(true);
+
+  function submit() {
+   if( submitEmail()===true){
+    createPass();
+   }
   }
-  invalid === false && createPass();
+
+  function onBlurInput() {
+    if (ValidateEmail(emailRef.current.value) === false) {
+      setInvalid(true);
+      errorRef.current.className = "block text-red-700";
+      emailRef.current.className =
+        "w-full flex text-gray-800 text-sm font-normal leading-5 h-9 px-2 py-1 outline-none rounded border-2 border-red-700";
+    }
+  }
+  function focusInput() {
+    if (ValidateEmail(emailRef.current.value) === false) {
+      errorRef.current.className = "hidden";
+      emailRef.current.className =
+        "w-full flex text-gray-800 text-sm font-normal leading-5 h-9 px-2 py-1 outline-none rounded border-2 border-gray-600";
+    }
+  }
 
   return (
     <div className="w-full">
-      <div className="h-16 bg-black w-full">asd</div>
+      <HeaderTop/>
       <div className="w-full h-full grid place-items-center">
         <div className=" mt-5 m-auto w-80  pt-1 pb-3 text-left">
           <div ref={continueWithEmailRef}>
@@ -49,9 +73,15 @@ function Authenticate() {
               `}
                 type="text"
                 ref={emailRef}
+                onBlur={() => {
+                  onBlurInput();
+                }}
+                onFocus={() => {
+                  focusInput();
+                }}
               />
               {invalid ? (
-                <p className="text-red-500 mt-2">
+                <p className="text-red-500 mt-2" ref={errorRef}>
                   Please check if the email address you've entered is correct.
                 </p>
               ) : (
@@ -61,7 +91,7 @@ function Authenticate() {
             <div className="w-full mt-4">
               <button
                 className="cursor-pointer w-full text-center text-base leading-6 h-12 bg-blue-600 border-none rounded font-semibold text-white"
-                onClick={submitEmail}
+                onClick={submit}
               >
                 Continue with email
               </button>
@@ -90,10 +120,10 @@ function Authenticate() {
               </div>
               <div className="cursor-pointer text-lg text-center text-blue-700 font-bold  mt-2">
                 <p
-                  onClick={() => {
-                    setMount((prev)=>!prev);
-                  }}
                   style={{ display: mount ? "none" : "block" }}
+                  onClick={() => {
+                    setMount(true);
+                  }}
                 >
                   More ways to sign in
                 </p>
@@ -105,26 +135,8 @@ function Authenticate() {
               </div>
             </div>
           </div>
-          <div className="mb-4">
-            <div className="h-line  bg-slate-400 w-full"></div>
-            <div className="text-center text-xs font-thin mt-4 mb-4">
-              By signing in or creating an account, you agree with our
-              <a href="fb.com" className="no-underline font-thin">
-                {" "}
-                Terms & conditions
-              </a>{" "}
-              and
-              <a href="fb.com" className="no-underline font-thin">
-                {" "}
-                Privacy statement
-              </a>
-            </div>
-            <div className="h-line  bg-slate-400 w-full"></div>
+          <FooterSignIn/>
           </div>
-          <div className="text-center mb-5">
-            All rights reserved.<br></br>Copyright (2006 - 2022) - Booking.com™
-          </div>
-        </div>
       </div>
     </div>
   );

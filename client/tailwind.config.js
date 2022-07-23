@@ -6,11 +6,13 @@ module.exports = {
       height: {
         line: "1px",
       },
-      
+      width:{
+        "350":"350px"
+      },
+      borderWidth: {
+        1: "1px",
+      },
     },
-    borderWidth:{
-      "1": "1px"
-    }
   },
   plugins: [],
 };
