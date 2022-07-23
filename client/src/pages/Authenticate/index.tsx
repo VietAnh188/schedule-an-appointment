@@ -2,10 +2,9 @@ import LoginInWith from "../../components/SignInOptions";
 import { FaFacebookSquare, FaApple } from "react-icons/fa";
 import { FcGoogle, FcPhoneAndroid } from "react-icons/fc";
 import { useRef, useState } from "react";
-
-import Header from "../../components/Header";
 import FooterSignIn from "../../components/FooterSignIn";
 import { useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
 function Authenticate() {
   const [mount, setMount] = useState(false);
   const [invalid, setInvalid] = useState(false);
@@ -55,7 +54,11 @@ const navigate = useNavigate();
 
   return (
     <div className="w-full">
+<<<<<<< HEAD
       <Header/>
+=======
+      <Header nav={false}/>
+>>>>>>> dev
       <div className="w-full h-full grid place-items-center">
         <div className=" mt-5 m-auto w-80  pt-1 pb-3 text-left">
           <div ref={continueWithEmailRef}>

@@ -4,11 +4,17 @@ import styles from './header.module.scss'
 import Navbar from "../Navbar";
 const cx = classNames.bind(styles)
 
-function Header() {
+
+interface Ihead {
+    nav?: boolean
+}
+function Header({nav}:Ihead) {
+    if(nav==undefined)
+        nav=true
     return ( 
         <div className={cx('header')}>
             <HeaderTop/>
-            <Navbar/>
+            {nav==false || <Navbar/>}
         </div>
         
      );

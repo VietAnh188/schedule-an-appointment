@@ -1,11 +1,11 @@
 import InputPassword from "../../../components/Input";
-import HeaderTop from "../../../components/HeaderTop";
+import Header from "../../../components/Header";
 import FooterSignIn from "../../../components/FooterSignIn";
 function NewPassword() {
 
     return (
       <div className="w-full">
-       
+        <Header nav={false}/>
         <div className="w-full h-full grid place-items-center">
           <div className=" mt-5 m-auto w-350  pt-1 pb-3 text-left">
             <div>

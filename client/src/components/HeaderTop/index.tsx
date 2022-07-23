@@ -7,7 +7,17 @@ import Button from "../Button";
 import Avatar from "../Avatar";
 const cx = classNames.bind(styles);
 
+
 function HeaderTop() {
+    
+    function start() {
+        let path = window.location.pathname
+        if(path==='/login' || path==='/login/password') {
+            return 'hidden'   
+        }
+        return ''
+    }
+    
   return (
       <header className={cx("header_top") + " wrap flex justify-between"}>
         <div className={`${cx("left")} py-3 px-4`}>
@@ -17,7 +27,7 @@ function HeaderTop() {
         </div>
         <div className={`${cx("right")} flex items-center`}>
           <ul className={`flex items-center cursor-pointer ${cx("list")}`}>
-            <li className="text-white">VND</li>
+            <li className={`text-white ${start()}`}>VND</li>
             <li>
               <img
                 src="https://t-cf.bstatic.com/static/img/flags/new/48-squared/gb/daba79fdd4066d133e8bf59070fd6819b951c403.png"
@@ -33,7 +43,7 @@ function HeaderTop() {
             <li className="hidden">
               <IoNotificationsOutline className="text-white text-2xl" />
             </li>
-            <li className={`${cx('btn')} mr-2`}>
+            <li className={`${cx('btn')} mr-2 ${start()}`}>
               <Link to="/property">
                 <Button
                   content="List your property"
@@ -44,7 +54,7 @@ function HeaderTop() {
             <li className="hidden">
               <Avatar />
             </li>
-            <li className={`${cx('btn')}`}>
+            <li className={`${cx('btn')} ${start()}`}>
               <Link to="/register">
                 <Button
                   content="Register"
