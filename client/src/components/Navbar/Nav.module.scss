@@ -1,0 +1,17 @@
+.navbar{
+  .list {
+    li {
+      padding-left: 8px;
+  }
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.navbar .list li a:hover {
+    background:hsla(0,0%,100%,.1);
+    display: block;
+    border-radius: 9999px;
+}

@@ -35,14 +35,14 @@ export class AuthsController {
       });
       await this.personsService.connectTo(person, account);
       return response.status(HttpStatus.OK).json({
-        status: HttpStatus.OK,
-        response: `${person.id} has been created`,
+        statusCode: HttpStatus.OK,
+        message: `${person.id} has been created`,
       });
     } catch (error) {
       throw new HttpException(
         {
-          status: HttpStatus.INTERNAL_SERVER_ERROR,
-          response: 'something went wrong',
+          statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: 'something went wrong',
         },
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
@@ -61,18 +61,14 @@ export class AuthsController {
       if (!bcrypt.compareSync(password, account.password))
         await Promise.reject({ status: HttpStatus.FORBIDDEN });
       account.password = undefined;
-      await this.cachesService.addToCache(
-        'user',
-        JSON.stringify(account),
-        10,
-      );
+      await this.cachesService.addToCache('user', JSON.stringify(account), 10);
       return response.status(HttpStatus.OK).json(account);
     } catch (error) {
       if (error.status === HttpStatus.FORBIDDEN) {
         throw new HttpException(
           {
-            status: HttpStatus.FORBIDDEN,
-            response: 'email or password wrong',
+            statusCode: HttpStatus.FORBIDDEN,
+            message: 'email or password wrong',
           },
           HttpStatus.FORBIDDEN,
         );

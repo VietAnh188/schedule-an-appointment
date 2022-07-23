@@ -1,21 +1,10 @@
-
 interface IProps {
     content: string,
-    color?: string,
-    border?: string,
-    bacolor?: string,
-    borderColor?: string,
-    flag?: string
+    className: string
 }
 
-function Button({content, color, border, bacolor, borderColor, flag}: IProps) {
-    return <button style={{
-        color: color === 'primary' ? 'var(--primary-color)' : color, 
-        border: border, 
-        borderColor: borderColor === 'primary' ? 'var(--primary-color)' : borderColor,
-        padding: '8px',
-        backgroundColor: bacolor || 'transparent',
-        marginRight: flag}} className="font-medium text-sm">{content}</button>;
+function Button({content, className}: IProps) {
+    return <button className={`font-medium text-sm p-2 cursor-pointer ${className}`}>{content}</button>;
 }
 
 export default Button;

@@ -22,6 +22,33 @@ export class AppointmentsController {
     private personsService: PersonsService,
   ) {}
 
+  @Post('unsubscribe')
+  async unsubscribeAppointment(
+    @Body() body: ISubscribeAppointment,
+    @Res() response: Response,
+  ) {
+    try {
+      const { person_id, appointment_id } = body;
+      const appointment = await this.appointmentsService.findOne(
+        appointment_id,
+      );
+      await this.appointmentsService.unsubscribe(person_id, appointment_id);
+      await this.appointmentsService.adjustSubscribed({
+        status: EStatus.DECREASE,
+        target: {
+          appointment_id: appointment.id,
+          value: appointment.subscribed,
+        },
+      });
+      return response.status(HttpStatus.OK).json({
+        statusCode: HttpStatus.OK,
+        message: `person has been unsubscribed appointment`,
+      });
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
+
   @Post('subscribe')
   async subscribeAppointment(
     @Body() body: ISubscribeAppointment,
@@ -41,8 +68,8 @@ export class AppointmentsController {
       });
       await this.appointmentsService.subscribe(person_id, appointment.id);
       return response.status(HttpStatus.OK).json({
-        status: HttpStatus.OK,
-        response: `person has been subscribed appointment`,
+        statusCode: HttpStatus.OK,
+        message: `person has been subscribed appointment`,
       });
     } catch (error) {
       throw new InternalServerErrorException();
@@ -76,8 +103,8 @@ export class AppointmentsController {
       const person = await this.personsService.findOne(personId);
       await this.appointmentsService.createOne(person.id, appointment);
       return response.status(HttpStatus.OK).json({
-        status: HttpStatus.OK,
-        response: `${person.id} are created a new appointment`,
+        statusCode: HttpStatus.OK,
+        message: `${person.id} are created a new appointment`,
       });
     } catch (error) {
       throw new InternalServerErrorException();

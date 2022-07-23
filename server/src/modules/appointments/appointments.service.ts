@@ -43,8 +43,23 @@ export class AppointmentsService {
     });
   }
 
+  async unsubscribe(person_id: string, appointment_id: string) {
+    const personsSubscribeAppointments =
+      await this.prisma.personsSubscribeAppointments.findMany({
+        where: {
+          person_id,
+          appointment_id,
+        },
+      });
+    await this.prisma.personsSubscribeAppointments.delete({
+      where: {
+        id: personsSubscribeAppointments[0].id,
+      },
+    });
+  }
+
   async subscribe(person_id: string, appointment_id: string) {
-    return await this.prisma.personsSubscribeAppointments.create({
+    await this.prisma.personsSubscribeAppointments.create({
       data: {
         person: {
           connect: {

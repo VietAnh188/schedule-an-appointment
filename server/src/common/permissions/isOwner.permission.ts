@@ -1,17 +1,9 @@
-import {
-  Injectable,
-  NestMiddleware,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { Request, Response, NextFunction } from 'express';
 import { PrismaService } from '../../modules/prisma/prisma.service';
 
-@Injectable()
-export class IsOwnerPermission implements NestMiddleware {
+export class IsOwnerPermission {
   constructor(private prisma: PrismaService) {}
 
-  async use(request: Request, response: Response, next: NextFunction) {
-    const { person_id, appointment_id } = request.body;
+  async execute(person_id: string, appointment_id: string) {
     const appointment = await this.prisma.appointment.findUnique({
       where: {
         id: appointment_id,
@@ -20,10 +12,6 @@ export class IsOwnerPermission implements NestMiddleware {
         person_id: true,
       },
     });
-    if (appointment.person_id === person_id) {
-      next(new UnauthorizedException('owner has been denied'));
-    } else {
-      next();
-    }
+    return appointment.person_id === person_id;
   }
 }

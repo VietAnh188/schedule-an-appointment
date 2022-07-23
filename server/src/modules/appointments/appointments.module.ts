@@ -8,8 +8,9 @@ import { AppointmentsService } from './appointments.service';
 import { AppointmentsController } from './appointments.controller';
 import { PersonsModule } from '../persons/persons.module';
 import { PrismaModule } from '../prisma/prisma.module';
-import { IsOwnerPermission } from '../../common/permissions/isOwner.permission';
-import { HasSubscribePermission } from '../../common/permissions/hasSubscribe.permission';
+import { DeniedOwnerMiddleware } from '../../common/middlewares/deniedOwner.middleware';
+import { CheckSubscribeMiddleware } from '../../common/middlewares/checkSubscribed.middleware';
+import { CheckNotSubscribedMiddleware } from '../../common/middlewares/checkNotSubscribed.middleware';
 
 @Module({
   controllers: [AppointmentsController],
@@ -18,9 +19,15 @@ import { HasSubscribePermission } from '../../common/permissions/hasSubscribe.pe
 })
 export class AppointmentsModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(IsOwnerPermission, HasSubscribePermission).forRoutes({
+    consumer.apply(DeniedOwnerMiddleware, CheckSubscribeMiddleware).forRoutes({
       path: 'appointments/subscribe',
       method: RequestMethod.POST,
     });
+    consumer
+      .apply(DeniedOwnerMiddleware, CheckNotSubscribedMiddleware)
+      .forRoutes({
+        path: 'appointments/unsubscribe',
+        method: RequestMethod.POST,
+      });
   }
 }

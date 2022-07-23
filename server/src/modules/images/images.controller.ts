@@ -18,8 +18,8 @@ export class ImagesController {
     if (!banners.length) {
       throw new HttpException(
         {
-          status: HttpStatus.NOT_FOUND,
-          error: "can't get banner, because no one is existing!",
+          statusCode: HttpStatus.NOT_FOUND,
+          message: "can't get banner, because no one is existing!",
         },
         HttpStatus.NOT_FOUND,
       );
