@@ -20,18 +20,29 @@ import { CheckIsOwnerMiddleware } from '../../common/middlewares/checkIsOwner.mi
 })
 export class AppointmentsModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {
+        /**
+         * person is owner of appointment -> denied
+         * person isn't owner of appointment -> check person was subscribe this appointment or not, if subscribed -> denied
+         */
         consumer
             .apply(DeniedOwnerMiddleware, CheckSubscribeMiddleware)
             .forRoutes({
                 path: 'appointments/subscribe',
                 method: RequestMethod.POST,
             });
+        /**
+         * person is owner of appointment -> denied
+         * person isn't owner of appointment -> check person was subscribe this appointment or not, if not subscribed -> denied
+         */
         consumer
             .apply(DeniedOwnerMiddleware, CheckNotSubscribedMiddleware)
             .forRoutes({
                 path: 'appointments/unsubscribe',
                 method: RequestMethod.POST,
             });
+        /**
+         * person isn't owner of appointment -> denied
+         */
         consumer
             .apply(CheckIsOwnerMiddleware)
             .forRoutes({

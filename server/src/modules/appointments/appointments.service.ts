@@ -10,6 +10,12 @@ import {
 export class AppointmentsService {
     constructor (private prisma: PrismaService) { }
 
+    /**
+     * Delete all personsSubscribeAppointments where the appointment id is equal to the appointment_id,
+     * then delete the appointment where the id is equal to the appointment_id.
+     * </code>
+     * @param {string} appointment_id - string
+     */
     async deleteAppointment(appointment_id: string) {
         await this.prisma.personsSubscribeAppointments.deleteMany({
             where: {
@@ -25,6 +31,10 @@ export class AppointmentsService {
         });
     }
 
+    /**
+     * This function is used to update the subscribed field of the appointment table in the database.
+     * @param {IAdjustSubscribe}  - IAdjustSubscribe
+     */
     async adjustSubscribed({ status, target }: IAdjustSubscribe) {
         switch (status) {
             case EStatus.INCREASE:
@@ -50,6 +60,11 @@ export class AppointmentsService {
         }
     }
 
+    /**
+     * Find a unique appointment by its id.
+     * @param {string} appointment_id - string
+     * @returns The appointment object
+     */
     async findOne(appointment_id: string) {
         return await this.prisma.appointment.findUnique({
             where: {
@@ -58,6 +73,12 @@ export class AppointmentsService {
         });
     }
 
+    /**
+     * It deletes a record from the personsSubscribeAppointments table where the person_id and
+     * appointment_id match the ones passed in as arguments.
+     * @param {string} person_id - string, appointment_id: string
+     * @param {string} appointment_id - string
+     */
     async unsubscribe(person_id: string, appointment_id: string) {
         const personsSubscribeAppointments =
             await this.prisma.personsSubscribeAppointments.findMany({
@@ -73,6 +94,13 @@ export class AppointmentsService {
         });
     }
 
+    /**
+     * This function creates a new record in the personsSubscribeAppointments table, which is a
+     * many-to-many relationship table between the persons and appointments tables, and it connects the
+     * person with the id of person_id to the appointment with the id of appointment_id.
+     * @param {string} person_id - The id of the person who is subscribing to the appointment
+     * @param {string} appointment_id - string
+     */
     async subscribe(person_id: string, appointment_id: string) {
         await this.prisma.personsSubscribeAppointments.create({
             data: {
@@ -90,6 +118,12 @@ export class AppointmentsService {
         });
     }
 
+    /**
+     * Find all appointments where the tags property is equal to the tags array passed in as an
+     * argument.
+     * @param {string[]} tags - string[]
+     * @returns An array of appointments that match the tags.
+     */
     async filterByTags(tags: string[]) {
         return await this.prisma.appointment.findMany({
             where: {
@@ -100,6 +134,10 @@ export class AppointmentsService {
         });
     }
 
+    /**
+     * Find all appointments where the active field is true.
+     * @returns An array of objects.
+     */
     async findAllActive() {
         return await this.prisma.appointment.findMany({
             where: {
@@ -112,10 +150,15 @@ export class AppointmentsService {
         return await this.prisma.appointment.findMany();
     }
 
-    async createOne(personId: string, appointment: Appointment) {
+    /**
+     * Create an appointment for a person with the given personId
+     * @param {string} person_id - string
+     * @param {Appointment} appointment - Appointment
+     */
+    async createOne(person_id: string, appointment: Appointment) {
         await this.prisma.person.update({
             where: {
-                id: personId,
+                id: person_id,
             },
             data: {
                 appointments: {

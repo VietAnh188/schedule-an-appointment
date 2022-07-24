@@ -24,6 +24,16 @@ export class AppointmentsController {
     ) { }
 
     @Delete()
+    /**
+     * It takes in a body of type IPersonAndAppointmentID, and a response object, and then it tries to
+     * delete an appointment, and if it succeeds, it returns a response with a status code of 200 and a
+     * message saying that the appointment has been deleted
+     * @param {IPersonAndAppointmentID} body - IPersonAndAppointmentID - this is the body of the
+     * request, which is an object that has the following properties:
+     * @param {Response} response - Response - this is the response object that will be returned to the
+     * client
+     * @returns The response object is being returned.
+     */
     async deleteAppontment(
         @Body() body: IPersonAndAppointmentID,
         @Res() response: Response
@@ -41,6 +51,14 @@ export class AppointmentsController {
     }
 
     @Post('unsubscribe')
+    /**
+     * "It finds an appointment by id, then it unsubscribes a person from that appointment, then it
+     * adjusts the subscribed value of that appointment."
+     * </code>
+     * @param {IPersonAndAppointmentID} body - IPersonAndAppointmentID
+     * @param {Response} response - Response
+     * @returns The response is being returned.
+     */
     async unsubscribeAppointment(
         @Body() body: IPersonAndAppointmentID,
         @Res() response: Response,
@@ -68,6 +86,18 @@ export class AppointmentsController {
     }
 
     @Post('subscribe')
+    /**
+     * "It takes a person_id and an appointment_id, finds the appointment, increases the subscribed
+     * value of the appointment, and subscribes the person to the appointment."
+     * </code>
+     * @param {IPersonAndAppointmentID} body - IPersonAndAppointmentID
+     * @param {Response} response - Response - this is the response object that is passed to the
+     * controller method.
+     * @returns {
+     *         statusCode: HttpStatus.OK,
+     *         message: `person has been subscribed appointment`,
+     *     }
+     */
     async subscribeAppointment(
         @Body() body: IPersonAndAppointmentID,
         @Res() response: Response,
