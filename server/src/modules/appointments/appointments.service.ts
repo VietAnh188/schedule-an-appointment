@@ -100,6 +100,14 @@ export class AppointmentsService {
         });
     }
 
+    async findAllActive() {
+        return await this.prisma.appointment.findMany({
+            where: {
+                active: true
+            }
+        });
+    }
+
     async findAll() {
         return await this.prisma.appointment.findMany();
     }

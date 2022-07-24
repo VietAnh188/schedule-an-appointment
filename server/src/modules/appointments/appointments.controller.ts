@@ -105,6 +105,11 @@ export class AppointmentsController {
     }
 
     @Get()
+    async findAllActive(@Res() response: Response) {
+        return response.status(HttpStatus.OK).json(await this.appointmentsService.findAllActive());
+    }
+
+    @Get()
     async findAll(@Res() response: Response) {
         return response
             .status(HttpStatus.OK)
