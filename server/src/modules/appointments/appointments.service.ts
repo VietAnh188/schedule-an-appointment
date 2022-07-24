@@ -11,6 +11,13 @@ export class AppointmentsService {
     constructor (private prisma: PrismaService) { }
 
     async deleteAppointment(appointment_id: string) {
+        await this.prisma.personsSubscribeAppointments.deleteMany({
+            where: {
+                appointment: {
+                    id: appointment_id
+                }
+            }
+        });
         await this.prisma.appointment.delete({
             where: {
                 id: appointment_id

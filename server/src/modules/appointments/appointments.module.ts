@@ -11,7 +11,7 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { DeniedOwnerMiddleware } from '../../common/middlewares/deniedOwner.middleware';
 import { CheckSubscribeMiddleware } from '../../common/middlewares/checkSubscribed.middleware';
 import { CheckNotSubscribedMiddleware } from '../../common/middlewares/checkNotSubscribed.middleware';
-import { CheckIsOwnerMiddleware } from 'src/common/middlewares/checkIsOwner.middleware';
+import { CheckIsOwnerMiddleware } from '../../common/middlewares/checkIsOwner.middleware';
 
 @Module({
     controllers: [AppointmentsController],
@@ -20,10 +20,12 @@ import { CheckIsOwnerMiddleware } from 'src/common/middlewares/checkIsOwner.midd
 })
 export class AppointmentsModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {
-        consumer.apply(DeniedOwnerMiddleware, CheckSubscribeMiddleware).forRoutes({
-            path: 'appointments/subscribe',
-            method: RequestMethod.POST,
-        });
+        consumer
+            .apply(DeniedOwnerMiddleware, CheckSubscribeMiddleware)
+            .forRoutes({
+                path: 'appointments/subscribe',
+                method: RequestMethod.POST,
+            });
         consumer
             .apply(DeniedOwnerMiddleware, CheckNotSubscribedMiddleware)
             .forRoutes({
@@ -33,7 +35,7 @@ export class AppointmentsModule implements NestModule {
         consumer
             .apply(CheckIsOwnerMiddleware)
             .forRoutes({
-                path: 'appointment',
+                path: 'appointments',
                 method: RequestMethod.DELETE,
             });
     }
