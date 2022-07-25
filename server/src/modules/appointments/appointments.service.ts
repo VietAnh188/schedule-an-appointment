@@ -142,6 +142,17 @@ export class AppointmentsService {
         return await this.prisma.appointment.findMany({
             where: {
                 active: true
+            },
+            select: {
+                id: true,
+                title: true,
+                content: true,
+                start_time: true,
+                end_time: true,
+                limit: true,
+                price: true,
+                tags: true,
+                subscribed: true,
             }
         });
     }
