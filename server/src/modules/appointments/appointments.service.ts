@@ -135,7 +135,8 @@ export class AppointmentsService {
     }
 
     /**
-     * Find all appointments where the active field is true.
+     * Find all appointments where active is true and return the id, title, content, start_time,
+     * end_time, limit, price, tags, and subscribed fields.
      * @returns An array of objects.
      */
     async findAllActive() {
