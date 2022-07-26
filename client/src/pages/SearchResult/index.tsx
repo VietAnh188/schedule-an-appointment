@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import ResultList from "../../components/ResultList";
+import SearchBar from "../../components/SearchBar";
 import { AppointmentDto } from '../../dtos/appointment.dto';
 
 function SearchResult() {
@@ -18,6 +19,7 @@ function SearchResult() {
     return (
         <div>
             <Header nav />
+            <SearchBar amount={searchResponses.length} />
             <div className="container py-3 flex mx-auto gap-x-8">
                 <div className='flex-2 border-2 rounded-md shadow-md'>
                     <ResultList data={searchResponses} />
