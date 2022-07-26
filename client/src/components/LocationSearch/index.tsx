@@ -1,5 +1,6 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useId, useEffect, useState } from 'react';
 import { CityDto } from '../../dtos/city.dto';
+import { ImLocation } from 'react-icons/im';
 
 interface ILocationOption {
     name: string;
@@ -7,7 +8,8 @@ interface ILocationOption {
 }
 
 function LocationSearch() {
-    const componentId = useRef();
+    const componentId = useId();
+    const locationButtonRef = useRef<HTMLDivElement>(document.createElement('div'));
 
     const [cities, setCities] = useState<ILocationOption[]>([]);
 
@@ -23,12 +25,18 @@ function LocationSearch() {
             });
             setCities(cities);
         });
+        locationButtonRef.current.style.width = `${locationButtonRef.current.offsetHeight}px`;
     }, []);
 
     return (
-        <select name="location" id={`${componentId}-location`}>
-            {cities.map(city => <option key={city.codename} value={city.codename}>{city.name}</option>)}
-        </select>
+        <div className='flex'>
+            <div ref={locationButtonRef} className='flex items-center justify-center bg-primary rounded-tl-md rounded-bl-md'>
+                <ImLocation className='text-white' />
+            </div>
+            <select className='w-full p-2 text-md' name="location" id={`${componentId}location`}>
+                {cities.map(city => <option key={city.codename} value={city.codename}>{city.name}</option>)}
+            </select>
+        </div>
     );
 }
 

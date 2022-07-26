@@ -12,8 +12,13 @@ function SearchBar({ amount }: IProps) {
                 <div className="flex-2 text-center">
                     <p><b>Showing</b>: <b>{amount}</b> result</p>
                 </div>
-                <div className="flex-3">
-                    <LocationSearch />
+                <div className="flex flex-3 gap-x-11">
+                    <div className='flex-1'>
+                        <LocationSearch />
+                    </div>
+                    <div className='flex-1'>
+                        2
+                    </div>
                 </div>
             </div>
         </div>
