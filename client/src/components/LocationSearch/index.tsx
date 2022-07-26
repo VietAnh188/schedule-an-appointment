@@ -1,4 +1,4 @@
-import { useRef, useId, useEffect, useState } from 'react';
+import { useRef, useId, useEffect, useState, forwardRef, useImperativeHandle, Ref } from 'react';
 import { CityDto } from '../../dtos/city.dto';
 import { ImLocation } from 'react-icons/im';
 
@@ -7,11 +7,25 @@ interface ILocationOption {
     codename: string;
 }
 
-function LocationSearch() {
+interface IProps {
+
+}
+
+export interface IForwardRef {
+    selectedOption(): string;
+}
+
+function LocationSearch(_props: IProps, forward: Ref<IForwardRef>) {
     const componentId = useId();
-    const locationButtonRef = useRef<HTMLDivElement>(document.createElement('div'));
+
+    const buttonRef = useRef<HTMLDivElement>(document.createElement('div'));
+    const locationSelectRef = useRef<HTMLSelectElement>(document.createElement('select'));
 
     const [cities, setCities] = useState<ILocationOption[]>([]);
+
+    useImperativeHandle(forward, () => ({
+        selectedOption: () => locationSelectRef.current.value
+    }));
 
     useEffect(() => {
         async function fetchLocations() {
@@ -25,19 +39,20 @@ function LocationSearch() {
             });
             setCities(cities);
         });
-        locationButtonRef.current.style.width = `${locationButtonRef.current.offsetHeight}px`;
     }, []);
+
+    buttonRef.current.style.width = `${buttonRef.current.offsetHeight}px`;
 
     return (
         <div className='flex'>
-            <div ref={locationButtonRef} className='flex items-center justify-center bg-primary rounded-tl-md rounded-bl-md'>
+            <div ref={buttonRef} className='flex items-center justify-center bg-primary rounded-tl-md rounded-bl-md'>
                 <ImLocation className='text-white' />
             </div>
-            <select className='w-full p-2 text-md' name="location" id={`${componentId}location`}>
+            <select ref={locationSelectRef} className='flex-1 p-2 text-md outline-none' name="location" id={`${componentId}location`}>
                 {cities.map(city => <option key={city.codename} value={city.codename}>{city.name}</option>)}
             </select>
         </div>
     );
 }
 
-export default LocationSearch;
+export default forwardRef(LocationSearch);
